@@ -1,0 +1,52 @@
+---
+default_config:
+    check_newer_vagrant_box: false
+    run_os_update: false
+servers:
+  - name: amp-pro
+    box: ubuntu/wily64
+    ram: 2048
+    cpus: 4
+    ip: 10.10.10.100
+    shell:
+      env:
+        AMP_PRO_VERSION: 3.1.0-20160325.0127
+      cmd:
+        - sudo systemctl restart rsyslog
+        - sudo sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get install --yes openjdk-8-jre-headless'
+        - sudo sed -i '/assistive_technologies/ s/^#*/#/' /etc/java-8-openjdk/accessibility.properties
+        - sudo mkdir -p /var/log/amp-pro
+        - sudo chown vagrant:vagrant /var/log/amp-pro
+        - curl -o cloudsoft-amp-pro.tar.gz -s -S http://developers-origin.cloudsoftcorp.com/amp-pro/amp-pro-dist-${AMP_PRO_VERSION}-dist.tar.gz
+        - tar zxf cloudsoft-amp-pro.tar.gz
+        - mv cloudsoft-amp-pro-${AMP_PRO_VERSION} cloudsoft-amp-pro
+        - ln -s /var/log/amp-pro /home/vagrant/cloudsoft-amp-pro/logs
+        - cp /vagrant/files/logback.xml /home/vagrant/cloudsoft-amp-pro/conf/
+        - sudo cp /vagrant/files/amp-pro.service /etc/systemd/system/amp-pro.service
+        - sudo cp /vagrant/files/motd /etc/motd
+        - mkdir -p /home/vagrant/.brooklyn
+        - cp /vagrant/files/brooklyn.properties /home/vagrant/.brooklyn/
+        - chmod 600 /home/vagrant/.brooklyn/brooklyn.properties
+        - sudo systemctl start amp-pro
+        - sudo systemctl enable amp-pro
+  - name: byon1
+    box: ubuntu/wily64
+    ram: 512
+    cpus: 2
+    ip: 10.10.10.101
+  - name: byon2
+    box: ubuntu/wily64
+    ram: 512
+    cpus: 2
+    ip: 10.10.10.102
+  - name: byon3
+    box: ubuntu/wily64
+    ram: 512
+    cpus: 2
+    ip: 10.10.10.103
+  - name: byon4
+    box: ubuntu/wily64
+    ram: 512
+    cpus: 2
+    ip: 10.10.10.104
+...
