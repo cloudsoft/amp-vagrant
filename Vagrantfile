@@ -27,10 +27,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       if server.has_key?("ip")
         server_config.vm.network "private_network", ip: server["ip"]
       end
-
+      #the port mapping config is in servers.yaml. In the event that auto-correction fails, please edit the port mappings in that file 
       if server.has_key?("forwarded_ports")
         server["forwarded_ports"].each do |ports|
-          server_config.vm.network "forwarded_port", guest: ports["guest"], host: ports["host"], guest_ip: ports["guest_ip"]
+          server_config.vm.network "forwarded_port", guest: ports["guest"], host: ports["host"], guest_ip: ports["guest_ip"], auto_correct: true
         end
       end
 
