@@ -8,7 +8,7 @@
        * apply a rollover policy to those logs
   -->
 
-  <property name="logging.dir" scope="context" value="/var/log/amp-pro/" />
+  <property name="logging.dir" scope="context" value="/var/log/amp/" />
   <include resource="logback-main.xml"/>
 
 </configuration>

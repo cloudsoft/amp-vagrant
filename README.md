@@ -1,5 +1,5 @@
-# amp-pro-vagrant
-Vagrant files to bootstrap an AMP Pro environment consisting of an AMP Pro instance and multiple byon nodes based on Ubuntu.
+# amp-vagrant
+Vagrant files to bootstrap an AMP environment consisting of an AMP instance and multiple byon nodes based on Ubuntu.
 
 The Vagrant environment has been verified on OSX 10.11 and Windows 10 using Vagrant 1.8.0+ and VirtualBox 5.0.10+. It is recommended to use the latest version of both Vagrant and Virtualbox.
 
@@ -9,26 +9,26 @@ The Vagrant environment has been verified on OSX 10.11 and Windows 10 using Vagr
 
 This assumes you have already installed Virtualbox and Vagrant on your local machine and have external network access to the Ubuntu update repositories and the Cloudsoft Artifactory.
 
-The supplied `servers.yaml` defines both an AMP Pro node and 4 small BYON nodes, you can ignore the BYON nodes if you only intend to demonstrate using cloud locations.
+The supplied `servers.yaml` defines both an AMP node and 4 small BYON nodes, you can ignore the BYON nodes if you only intend to demonstrate using cloud locations.
 
-AMP Pro is deployed with login authentication disabled and persistance enabled by default (mapped through to the `amp-pro-persistance` directory in your local repo).
+AMP is deployed with login authentication disabled and persistance enabled by default (mapped through to the `amp-persistance` directory in your local repo).
 
-### Starting AMP Pro
+### Starting AMP
 
 1. Clone and cd into this repository
 
     ```
-    git clone https://github.com/cloudsoft/amp-pro-vagrant
-    cd amp-pro-vagrant
+    git clone https://github.com/cloudsoft/amp-vagrant
+    cd amp-vagrant
     ```
 
-2. Start the AMP Pro node
+2. Start the AMP node
 
     ```
-    vagrant up amp-pro
+    vagrant up amp
     ```
 
-3. Connect to the [AMP Pro Web Console](http://10.10.10.100:8081/)
+3. Connect to the [AMP Web Console](http://10.10.10.100:8081/)
 
 ### Starting BYON Nodes
 
@@ -52,11 +52,11 @@ AMP Pro is deployed with login authentication disabled and persistance enabled b
           - 10.10.10.104
     ````
 
-### Terminal Access to AMP Pro Node
+### Terminal Access to AMP Node
 
 You may connect using `vagrant ssh <node name>`, for example:
 
-    vagrant ssh amp-pro
+    vagrant ssh amp
 
 Or by ssh'ing to the VM as the `vagrant` user:
 
@@ -64,19 +64,19 @@ Or by ssh'ing to the VM as the `vagrant` user:
 
 See the [IP Addresses section](#IP-Addresses).
 
-### Starting/Stopping/Status Checking AMP Pro
+### Starting/Stopping/Status Checking AMP
 
-AMP Pro is running under the control of SystemD and can be started/stopped as follows (logging in as described above):
+AMP is running under the control of SystemD and can be started/stopped as follows (logging in as described above):
 
-    sudo systemctl status amp-pro
-    sudo systemctl start amp-pro
-    sudo systemctl stop amp-pro
+    sudo systemctl status amp
+    sudo systemctl start amp
+    sudo systemctl stop amp
 
 ### Customising VMs 
 The following optional steps are provided to describe how you may override the default VM configurations.
 
-#### AMP Pro Version
-You can either use the supplied AMP Pro version or override by changing the `AMP_PRO_VERSION` field in `servers.yaml`.
+#### AMP Version
+You can either use the supplied AMP version or override by changing the `AMP_VERSION` field in `servers.yaml`.
 
 #### Running OS Updates
 As a convenience you can set `run_os_update` to `true` in the `servers.yaml` file to automatically run package updates for `apt` and `rpm` based distros. This defaults to `false` to minimise the amount of data downloaded.
@@ -107,7 +107,7 @@ cpus: 3
 
 ## License
 
-amp-pro-vagrant is built on [Cloudsoft AMP](http://www.cloudsoftcorp.com) and [Apache Brooklyn](http://brooklyn.io)
+amp-vagrant is built on [Cloudsoft AMP](http://www.cloudsoftcorp.com) and [Apache Brooklyn](http://brooklyn.io)
 and is copyright &copy; 2016 by Cloudsoft Corporation.
 
 This software is released under the terms of [the Cloudsoft EULA](LICENSE.txt).
