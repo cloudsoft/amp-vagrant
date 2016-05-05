@@ -8,6 +8,9 @@ servers:
     ram: 2048
     cpus: 4
     ip: 10.10.10.100
+    forwarded_ports:
+     - guest: 8081
+       host: 8081
     shell:
       env:
         AMP_VERSION: 3.1.0
