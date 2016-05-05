@@ -10,7 +10,7 @@ servers:
     ip: 10.10.10.100
     shell:
       env:
-        AMP_VERSION: 3.1.0
+        AMP_VERSION: 3.1.1
       cmd:
         - sudo systemctl restart rsyslog
         - sudo sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get install --yes openjdk-8-jre-headless'
