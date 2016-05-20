@@ -13,14 +13,14 @@ servers:
        host: 8081
     shell:
       env:
-        AMP_VERSION: 3.1.1
+        AMP_VERSION: 3.2.0
       cmd:
         - sudo systemctl restart rsyslog
         - sudo sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get install --yes openjdk-8-jre-headless'
         - sudo sed -i '/assistive_technologies/ s/^#*/#/' /etc/java-8-openjdk/accessibility.properties
         - sudo mkdir -p /var/log/amp
         - sudo chown vagrant:vagrant /var/log/amp
-        - curl -o cloudsoft-amp-pro.tar.gz -s -S http://developers-origin.cloudsoftcorp.com/amp-pro/amp-pro-dist-${AMP_VERSION}-dist.tar.gz
+        - curl -o cloudsoft-amp-pro.tar.gz -s -S http://developers.cloudsoftcorp.com/amp-pro/amp-pro-dist-${AMP_VERSION}-dist.tar.gz
         - tar zxf cloudsoft-amp-pro.tar.gz
         - mv cloudsoft-amp-pro-${AMP_VERSION} cloudsoft-amp
         - ln -s /var/log/amp /home/vagrant/cloudsoft-amp/logs
