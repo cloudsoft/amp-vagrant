@@ -1,7 +1,7 @@
 ---
 default_config:
-    check_newer_vagrant_box: false
-    run_os_update: false
+    check_newer_vagrant_box: true
+    run_os_update: true
 servers:
   - name: amp
     box: ubuntu/wily64
