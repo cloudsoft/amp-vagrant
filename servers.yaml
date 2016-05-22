@@ -16,7 +16,7 @@ servers:
         AMP_VERSION: 3.2.0
       cmd:
         - sudo systemctl restart rsyslog
-        - sudo sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get install --yes openjdk-8-jre-headless'
+        - sudo sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get --yes update; apt-get install --yes openjdk-8-jre-headless'
         - sudo sed -i '/assistive_technologies/ s/^#*/#/' /etc/java-8-openjdk/accessibility.properties
         - sudo mkdir -p /var/log/amp
         - sudo chown vagrant:vagrant /var/log/amp
