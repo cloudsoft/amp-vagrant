@@ -31,7 +31,7 @@ sudo sh -c "export DEBIAN_FRONTEND=noninteractive; apt-get install --yes openjdk
 sudo sed -i '/assistive_technologies/ s/^#*/#/' /etc/java-8-openjdk/accessibility.properties
 
 echo "Download AMP"
-curl -o cloudsoft-amp-karaf.tar.gz -s -S -u "${AMP_DOWNLOAD_USER}:${AMP_DOWNLOAD_PASS}" http://downloads.cloudsoftcorp.com/amp/${AMP_VERSION}/cloudsoft-amp-karaf-${AMP_VERSION}.tar.gz
+curl -o cloudsoft-amp-karaf.tar.gz -s -S -u "${AMP_DOWNLOAD_USER}:${AMP_DOWNLOAD_PASS}" http://developers-origin.cloudsoftcorp.com/amp/${AMP_VERSION}/cloudsoft-amp-karaf-${AMP_VERSION}.tar.gz
 
 echo "Install AMP"
 tar zxf cloudsoft-amp-karaf.tar.gz
@@ -50,17 +50,17 @@ cd /home/vagrant/cloudsoft-amp-karaf
 echo ".. starting karaf manually"
 ./bin/start
 echo ".. wait for karaf to start"
-while ! ./bin/client version; do
+while ! ./bin/client version > /dev/null 2>&1; do
   echo ".... waiting for 5 seconds"
   sleep 5
 done
 echo ".. installing karaf-wrapper"
-./bin/client feature:install service-wrapper
-./bin/client wrapper:install
+./bin/client feature:install service-wrapper > /dev/null 2>&1
+./bin/client wrapper:install > /dev/null 2>&1
 echo ".. stopping karaf manually"
 ./bin/stop
 echo ".. wait for karaf to stop"
-while ./bin/client version; do
+while ./bin/client version > /dev/null 2>&1; do
   echo ".... waiting for 5 seconds"
   sleep 5
 done
