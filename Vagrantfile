@@ -7,7 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 # AMP download credentials read from environment
 amp_download_user = ENV['user']
-amp_download_pass = ENV['pass']
+amp_download_pass = ENV['password']
 amp_download_creds = Hash.new
 
 # Set credentials hash, strip beginning/end hash if present

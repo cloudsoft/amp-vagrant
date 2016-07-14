@@ -13,12 +13,12 @@ if [ -z "$AMP_DOWNLOAD_USER" ] || [ -z "$AMP_DOWNLOAD_PASS" ]; then
 ERROR - AMP Install Script failed to execute: - Username and/or Password not set
 ERROR - 
 ERROR - Please reattempt the provisioning step supplying credentials:
-ERROR -    user=myuser pass=mypassword vagrant provision amp
+ERROR -    user=myuser password=mypassword vagrant provision amp
 ERROR - 
 ERROR - Or, alternatively, destroy the existing AMP instance:
 ERROR -    vagrant destroy amp
 ERROR - And rerun vagrant up supplying credentials:
-ERROR -    user=myuser pass=mypassword vagrant up amp
+ERROR -    user=myuser password=mypassword vagrant up amp
 EOL
   exit 1
 fi
@@ -31,7 +31,7 @@ sudo sh -c "export DEBIAN_FRONTEND=noninteractive; apt-get install --yes openjdk
 sudo sed -i '/assistive_technologies/ s/^#*/#/' /etc/java-8-openjdk/accessibility.properties
 
 echo "Download AMP"
-curl -o cloudsoft-amp-karaf.tar.gz -s -S -u "${AMP_DOWNLOAD_USER}:${AMP_DOWNLOAD_PASS}" http://10.10.10.101/cloudsoft-amp-karaf-${AMP_VERSION}.tar.gz
+curl -o cloudsoft-amp-karaf.tar.gz -s -S -u "${AMP_DOWNLOAD_USER}:${AMP_DOWNLOAD_PASS}" http://downloads.cloudsoftcorp.com/amp/${AMP_VERSION}/cloudsoft-amp-karaf-${AMP_VERSION}.tar.gz
 
 echo "Install AMP"
 tar zxf cloudsoft-amp-karaf.tar.gz

@@ -13,7 +13,7 @@ servers:
        host: 8081
     shell:
       env:
-        AMP_VERSION: 3.2.1-SNAPSHOT
+        AMP_VERSION: 4.0.0-20160714.1956
       cmd:
         - /vagrant/files/install_amp.sh
   - name: byon1
