@@ -23,15 +23,45 @@ EOL
   exit 1
 fi
 
+echo "Download AMP"
+curl -o cloudsoft-amp-karaf.tar.gz -s -S -u "${AMP_DOWNLOAD_USER}:${AMP_DOWNLOAD_PASS}" http://developers-origin.cloudsoftcorp.com/amp/${AMP_VERSION}/cloudsoft-amp-karaf-${AMP_VERSION}.tar.gz
+
+echo "Validate downloaded file is an archive"
+download_type=`file cloudsoft-amp-karaf.tar.gz`
+
+if ! (echo $download_type | grep 'gzip compressed data') > /dev/null ; then
+  cat >&2 <<EOL
+ERROR - Downloaded AMP archive is not valid tar.gz archive
+ERROR - type: ${download_type}
+ERROR -
+EOL
+
+  if grep -i unauthorized cloudsoft-amp-karaf.tar.gz > /dev/null; then
+    cat >&2 <<EOL
+ERROR - The AMP download was unauthorized please check your credentials
+ERROR - and reattempt the provisioning step:
+ERROR -    user=myuser password=mypassword vagrant provision amp
+EOL
+  elif grep -i "not found" cloudsoft-amp-karaf.tar.gz > /dev/null; then
+    cat >&2 <<EOL
+ERROR - The AMP download URL was invalid, please check the AMP version
+ERROR - configured in servers.yaml and run the provision step again
+ERROR - if the version was incorrect:
+ERROR -    user=myuser password=mypassword vagrant provision amp
+ERROR - If you are unsure what version to expect or continue to see
+ERROR - problems please reach out to Cloudsoft support who will
+ERROR - assist you further.
+EOL
+  fi
+  exit 1
+fi
+
 echo "Restarting Syslog"
 sudo systemctl restart rsyslog
 
 echo "Install Java"
 sudo sh -c "export DEBIAN_FRONTEND=noninteractive; apt-get install --yes openjdk-${JAVA_VERSION}-jre-headless"
 sudo sed -i '/assistive_technologies/ s/^#*/#/' /etc/java-8-openjdk/accessibility.properties
-
-echo "Download AMP"
-curl -o cloudsoft-amp-karaf.tar.gz -s -S -u "${AMP_DOWNLOAD_USER}:${AMP_DOWNLOAD_PASS}" http://developers-origin.cloudsoftcorp.com/amp/${AMP_VERSION}/cloudsoft-amp-karaf-${AMP_VERSION}.tar.gz
 
 echo "Install AMP"
 tar zxf cloudsoft-amp-karaf.tar.gz
