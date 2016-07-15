@@ -54,9 +54,10 @@ while ! ./bin/client version > /dev/null 2>&1; do
   echo ".... waiting for 5 seconds"
   sleep 5
 done
-echo ".. installing karaf-wrapper"
-./bin/client feature:install service-wrapper > /dev/null 2>&1
-./bin/client wrapper:install > /dev/null 2>&1
+echo ".. installing service-wrapper feature"
+./bin/client "feature:install service-wrapper" > /dev/null 2>&1
+echo ".. creating AMP service wrapper"
+./bin/client "wrapper:install --name amp" > /dev/null 2>&1
 echo ".. stopping karaf manually"
 ./bin/stop
 echo ".. wait for karaf to stop"
@@ -69,11 +70,11 @@ echo "Configure AMP persistence"
 grep -q -e "^persistMode"  ./etc/org.apache.brooklyn.osgilauncher.cfg || echo "persistMode=AUTO" >> ./etc/org.apache.brooklyn.osgilauncher.cfg
 grep -q -e "^persistenceDir"  ./etc/org.apache.brooklyn.osgilauncher.cfg || echo "persistenceDir=/vagrant/amp-persistence" >> ./etc/org.apache.brooklyn.osgilauncher.cfg
 
-echo "Configure amp-karaf service to run as vagrant"
-grep -q -F "User=vagrant" ./bin/karaf.service || sed -i '/ExecStop=.*/a User=vagrant' ./bin/karaf.service 
-grep -q -F "Group=vagrant" ./bin/karaf.service || sed -i '/User=.*/a Group=vagrant' ./bin/karaf.service 
+echo "Configure amp service to run as non-root user"
+grep -q -F "User=vagrant" ./bin/amp.service || sed -i '/ExecStop=.*/a User=vagrant' ./bin/amp.service 
+grep -q -F "Group=vagrant" ./bin/amp.service || sed -i '/User=.*/a Group=vagrant' ./bin/amp.service 
 
-echo "Adding amp-karaf service to systemd"
-sudo systemctl enable /home/vagrant/cloudsoft-amp-karaf/bin/karaf.service
-echo "Starting amp-karaf"
-sudo systemctl start karaf
+echo "Adding amp service to systemd"
+sudo systemctl enable /home/vagrant/cloudsoft-amp-karaf/bin/amp.service
+echo "Starting amp"
+sudo systemctl start amp
