@@ -32,7 +32,7 @@ AMP is deployed with login authentication disabled and persistance enabled by de
 
 ### Starting BYON Nodes
 
-1. You can start the BYON nodes with (Note that you can add additional nodes to `servers.yaml` if desired).
+1. You can start the BYON nodes with (Note that you can add additional nodes to `servers.yaml` if desired). These nodes are accessible using the username `vagrant` and password `vagrant`.
 
     ```
     vagrant up byon1 byon2 byon3 byon4
@@ -57,12 +57,6 @@ AMP is deployed with login authentication disabled and persistance enabled by de
 You may connect using `vagrant ssh <node name>`, for example:
 
     vagrant ssh amp
-
-Or by ssh'ing to the VM as the `vagrant` user:
-
-    ssh vagrant@10.10.10.100
-
-See the [IP Addresses section](#IP-Addresses).
 
 ### Starting/Stopping/Status Checking AMP
 
