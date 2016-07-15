@@ -3,7 +3,7 @@ Vagrant files to bootstrap an AMP environment consisting of an AMP instance and 
 
 The Vagrant environment has been verified on OSX 10.11 and Windows 10 using Vagrant 1.8.0+ and VirtualBox 5.0.10+. It is recommended to use the latest version of both Vagrant and Virtualbox.
 
-![Vagrant 1.8.0+](https://img.shields.io/badge/Vagrant-1.8.0%2B-blue.svg) ![Virtualbox 5.0.10+](https://img.shields.io/badge/VirtualBox-5.0.10%2B-blue.svg) ![OSX 10.11](https://img.shields.io/badge/OSX-10.11-blue.svg) ![Windows 10](https://img.shields.io/badge/Windows-10-blue.svg)
+![Vagrant 1.8.4+](https://img.shields.io/badge/Vagrant-1.8.0%2B-blue.svg) ![Virtualbox 5.0.10+](https://img.shields.io/badge/VirtualBox-5.0.10%2B-blue.svg) ![OSX 10.11](https://img.shields.io/badge/OSX-10.11-blue.svg) ![Windows 10](https://img.shields.io/badge/Windows-10-blue.svg)
 
 ## How to use
 
@@ -22,13 +22,13 @@ AMP is deployed with login authentication disabled and persistance enabled by de
     cd amp-vagrant
     ```
 
-2. Start the AMP node
+2. Start the AMP node supplying your AMP Download credentials
 
     ```
-    vagrant up amp
+    user=myuser password=mypassword vagrant up amp
     ```
 
-3. Connect to the [AMP Web Console](http://10.10.10.100:8081/)
+3. Connect to the [AMP Web Console](http://localhost:8081/), or [new UI](http://localhost:8081/amp-ui-home) with the username `admin` and password `password`.
 
 ### Starting BYON Nodes
 
