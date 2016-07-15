@@ -11,6 +11,7 @@ servers:
     forwarded_ports:
      - guest: 8081
        host: 8081
+       autocorrect: true
     shell:
       env:
         AMP_VERSION: 4.0.0-20160714.1956
