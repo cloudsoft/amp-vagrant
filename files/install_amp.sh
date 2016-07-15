@@ -74,6 +74,10 @@ echo "Configure amp service to run as non-root user"
 grep -q -F "User=vagrant" ./bin/amp.service || sed -i '/ExecStop=.*/a User=vagrant' ./bin/amp.service 
 grep -q -F "Group=vagrant" ./bin/amp.service || sed -i '/User=.*/a Group=vagrant' ./bin/amp.service 
 
+echo "Configure wrapper to restart on failure"
+grep -q -F "Restart=always" ./bin/amp.service || sed -i '/ExecStop=.*/a Restart=always' ./bin/amp.service 
+grep -q -F "RestartSec=3" ./bin/amp.service || sed -i '/ExecStop=.*/a RestartSec=3' ./bin/amp.service 
+
 echo "Adding amp service to systemd"
 sudo systemctl enable /home/vagrant/cloudsoft-amp-karaf/bin/amp.service
 echo "Starting amp"
