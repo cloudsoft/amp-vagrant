@@ -24,7 +24,7 @@ EOL
 fi
 
 echo "Download AMP"
-curl -o cloudsoft-amp-karaf.tar.gz -s -S -u "${AMP_DOWNLOAD_USER}:${AMP_DOWNLOAD_PASS}" http://developers-origin.cloudsoftcorp.com/amp/${AMP_VERSION}/cloudsoft-amp-karaf-${AMP_VERSION}.tar.gz
+curl -o cloudsoft-amp-karaf.tar.gz -s -S -u "${AMP_DOWNLOAD_USER}:${AMP_DOWNLOAD_PASS}" http://developers-origin.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest.tar.gz
 
 echo "Validate downloaded file is an archive"
 download_type=`file cloudsoft-amp-karaf.tar.gz`
