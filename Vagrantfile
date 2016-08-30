@@ -8,17 +8,6 @@ VAGRANTFILE_API_VERSION = "2"
 # Autocorrect Port Clashes
 DEFAULT_AUTOCORRECT = false
 
-# AMP download credentials read from environment
-amp_download_user = ENV['user']
-amp_download_pass = ENV['password']
-amp_download_creds = Hash.new
-
-# Set credentials hash, strip beginning/end hash if present
-if amp_download_user and amp_download_pass then
-  amp_download_creds["AMP_DOWNLOAD_USER"] = amp_download_user
-  amp_download_creds["AMP_DOWNLOAD_PASS"] = amp_download_pass
-end
-
 # Update OS (Debian/RedHat based only)
 UPDATE_OS_CMD = "(sudo apt-get update && sudo apt-get -y upgrade) || (sudo yum -y update)"
 
@@ -66,7 +55,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       
       if server["shell"] && server["shell"]["cmd"]
         server["shell"]["cmd"].each do |cmd|
-          server_config.vm.provision "shell", privileged: false, inline: cmd, env: server["shell"]["env"].merge(amp_download_creds)
+          server_config.vm.provision "shell", privileged: false, inline: cmd
         end
       end
 
