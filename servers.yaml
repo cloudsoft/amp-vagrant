@@ -14,7 +14,7 @@ servers:
        autocorrect: true
     shell:
       env:
-        AMP_VERSION: 4.0.x
+        AMP_VERSION: latest
       cmd:
         - /vagrant/files/install_amp.sh
   - name: byon1
