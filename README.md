@@ -28,7 +28,7 @@ AMP is deployed with login authentication disabled and persistance enabled by de
     user=myuser password=mypassword vagrant up amp
     ```
 
-3. Connect to the [AMP Web Console](http://localhost:8081/), or [new UI](http://localhost:8081/amp-ui-home) with the username `admin` and password `password`.
+3. Connect to the [AMP UI](http://localhost:8081/) with the username `admin` and password `password`.
 
 ### Starting BYON Nodes
 
