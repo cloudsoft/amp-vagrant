@@ -7,7 +7,7 @@ The Vagrant environment has been verified on OSX 10.11 and Windows 10 using Vagr
 
 ## How to use
 
-For instructions on using this Vagrant environment with Cloudsoft AMP please refer to the [Get AMP Running](docs.cloudsoft.io/tutorials/tutorial-get-amp-running.html) tutorial.
+For instructions on using this Vagrant environment with Cloudsoft AMP please refer to the [Get AMP Running](http://docs.cloudsoft.io/tutorials/tutorial-get-amp-running.html) tutorial.
 
 ### Customising VMs 
 The following optional steps are provided to describe how you may override the default VM configurations.
