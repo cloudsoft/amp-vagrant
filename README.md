@@ -7,64 +7,7 @@ The Vagrant environment has been verified on OSX 10.11 and Windows 10 using Vagr
 
 ## How to use
 
-This assumes you have already installed Virtualbox and Vagrant on your local machine and have external network access to the Ubuntu update repositories and the Cloudsoft Artifactory.
-
-The supplied `servers.yaml` defines both an AMP node and 4 small BYON nodes, you can ignore the BYON nodes if you only intend to demonstrate using cloud locations.
-
-AMP is deployed with login authentication disabled and persistance enabled by default (mapped through to the `amp-persistance` directory in your local repo).
-
-### Starting AMP
-
-1. Clone and cd into this repository
-
-    ```
-    git clone https://github.com/cloudsoft/amp-vagrant
-    cd amp-vagrant
-    ```
-
-2. Start the AMP node
-
-    ```
-    vagrant up amp
-    ```
-
-3. Connect to the [AMP UI](http://localhost:8081/) with the username `admin` and password `password`.
-
-### Starting BYON Nodes
-
-1. You can start the BYON nodes with (Note that you can add additional nodes to `servers.yaml` if desired). These nodes are accessible using the username `vagrant` and password `vagrant`.
-
-    ```
-    vagrant up byon1 byon2 byon3 byon4
-    ```
-
-2. They will be availble to add to your blueprint, for example to add all 4 nodes to a `byon-all` location.
-
-    ```
-    location:
-      byon-all:
-        user: vagrant
-        password: vagrant
-        hosts:
-          - 10.10.10.101
-          - 10.10.10.102
-          - 10.10.10.103
-          - 10.10.10.104
-    ````
-
-### Terminal Access to AMP Node
-
-You may connect using `vagrant ssh <node name>`, for example:
-
-    vagrant ssh amp
-
-### Starting/Stopping/Status Checking AMP
-
-AMP is running under the control of SystemD and can be started/stopped as follows (logging in as described above):
-
-    sudo systemctl status amp
-    sudo systemctl start amp
-    sudo systemctl stop amp
+For instructions on using this Vagrant environment with Cloudsoft AMP please refer to the [Get AMP Running](docs.cloudsoft.io/tutorials/tutorial-get-amp-running.html) tutorial.
 
 ### Customising VMs 
 The following optional steps are provided to describe how you may override the default VM configurations.
