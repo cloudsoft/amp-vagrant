@@ -22,10 +22,10 @@ AMP is deployed with login authentication disabled and persistance enabled by de
     cd amp-vagrant
     ```
 
-2. Start the AMP node supplying your AMP Download credentials
+2. Start the AMP node
 
     ```
-    user=myuser password=mypassword vagrant up amp
+    vagrant up amp
     ```
 
 3. Connect to the [AMP UI](http://localhost:8081/) with the username `admin` and password `password`.
@@ -68,9 +68,6 @@ AMP is running under the control of SystemD and can be started/stopped as follow
 
 ### Customising VMs 
 The following optional steps are provided to describe how you may override the default VM configurations.
-
-#### AMP Version
-You can either use the supplied AMP version or override by changing the `AMP_VERSION` field in `servers.yaml`.
 
 #### Running OS Updates
 As a convenience you can set `run_os_update` to `true` in the `servers.yaml` file to automatically run package updates for `apt` and `rpm` based distros. This defaults to `false` to minimise the amount of data downloaded.
