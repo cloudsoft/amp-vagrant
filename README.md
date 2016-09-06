@@ -44,4 +44,4 @@ cpus: 3
 amp-vagrant is built on [Cloudsoft AMP](http://www.cloudsoftcorp.com) and [Apache Brooklyn](http://brooklyn.io)
 and is copyright &copy; 2016 by Cloudsoft Corporation.
 
-This software is released under the terms of [the Cloudsoft EULA](http://www.cloudsoft.io/trial-software-license).
+This software is released under the terms of [the Cloudsoft CTSLA](http://www.cloudsoft.io/trial-software-license).
