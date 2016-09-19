@@ -16,22 +16,22 @@ servers:
       cmd:
         - /vagrant/files/install_amp.sh
   - name: byon1
-    box: ubuntu/wily64
+    box: bento/centos-6.7
     ram: 512
     cpus: 2
     ip: 10.10.10.101
   - name: byon2
-    box: ubuntu/wily64
+    box: bento/centos-6.7
     ram: 512
     cpus: 2
     ip: 10.10.10.102
   - name: byon3
-    box: ubuntu/wily64
+    box: bento/centos-6.7
     ram: 512
     cpus: 2
     ip: 10.10.10.103
   - name: byon4
-    box: ubuntu/wily64
+    box: bento/centos-6.7
     ram: 512
     cpus: 2
     ip: 10.10.10.104
