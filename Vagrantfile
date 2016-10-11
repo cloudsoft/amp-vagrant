@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   yaml_cfg["servers"].each do |server|
     config.vm.define server["name"] do |server_config|
       server_config.vm.box = server["box"]
-
+      
       server_config.vm.box_check_update = yaml_cfg["default_config"]["check_newer_vagrant_box"]
 
       if server.has_key?("ip")
@@ -43,6 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
 
       server_config.vm.hostname = server["name"]
+      server_config.ssh.insert_key = false
       server_config.vm.provider :virtualbox do |vb|
         vb.name = server["name"]
         vb.memory = server["ram"]
