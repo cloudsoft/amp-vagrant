@@ -8,40 +8,31 @@ JAVA_VERSION=8
 export JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64/
 
 echo "Download AMP"
-curl -o cloudsoft-amp-karaf-all.deb -s -S http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-all.deb
+curl -o cloudsoft-amp-karaf-noarch.rpm -s -S http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm
 
 echo "Validate downloaded file is an archive"
-download_type=`file cloudsoft-amp-karaf-all.deb`
+download_type=`file cloudsoft-amp-karaf-noarch.rpm`
 
-if ! (echo $download_type | grep 'Debian binary package') > /dev/null ; then
+if ! (echo $download_type | grep 'RPM .* bin noarch') > /dev/null ; then
   cat >&2 <<EOL
-ERROR - Downloaded AMP .deb is not a valid Debian binary package
-ERROR - type: ${download_type}
+ERROR - Downloaded AMP RPM is not a valid RPM binary package - please contact Cloudsoft support
+ERROR - who will assist you further. Type: ${download_type}
 ERROR -
 EOL
-
-  if grep -i unauthorized cloudsoft-amp-karaf-all.deb > /dev/null; then
-    cat >&2 <<EOL
-ERROR - The AMP download was unauthorized - please contact Cloudsoft support
-ERROR - who will assist you further.
-EOL
-  elif grep -i "not found" cloudsoft-amp-karaf.tar.gz > /dev/null; then
-    cat >&2 <<EOL
-ERROR - The AMP download URL was invalid, please contact Cloudsoft support who will
-ERROR - assist you further.
-EOL
-  fi
   exit 1
 fi
 
 echo "Restarting Syslog"
 sudo systemctl restart rsyslog
 
-echo "Install Java"
-sudo apt-get install -y default-jre-headless
+echo "Updating Yum"
+sudo yum -y update
 
+echo "Install Java"
+sudo yum install -y java-1.8.0-openjdk-headless
+	
 echo "Install AMP"
-sudo dpkg -i cloudsoft-amp-karaf-all.deb
+sudo yum -y install cloudsoft-amp-karaf-noarch.rpm
 
 echo "Configure AMP Properties"
 sudo mkdir -p /opt/amp/.brooklyn
