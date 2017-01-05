@@ -1,5 +1,5 @@
 # amp-vagrant
-Vagrant files to bootstrap an AMP environment consisting of an AMP instance and multiple byon nodes based on Ubuntu.
+Vagrant files to bootstrap an AMP environment consisting of an AMP instance and multiple byon nodes based on CentOS.
 
 The Vagrant environment has been verified on OSX 10.11 and Windows 10 using Vagrant 1.8.0+ and VirtualBox 5.0.10+. It is recommended to use the latest version of both Vagrant and Virtualbox.
 
@@ -31,10 +31,10 @@ You can override the IP addresses assigned to each node by changing the `ip` for
 **NOTE** These private addresses will only be accessible from your local machine. It is possible, but not documented, to expose some service ports via your local machine (reach out if you believe this would be useful for you).
 
 #### VM Resources
-You can alter the base OS, number of CPUs and amount of RAM allocated to each VM by altering the `box`, `cpu` or `ram` fields in `servers.yaml`. For example to switch a VM to Ubuntu Trust64 with 3 cpu cores and 1GB of RAM you would change the fields as follows:
+You can alter the base OS, number of CPUs and amount of RAM allocated to each VM by altering the `box`, `cpu` or `ram` fields in `servers.yaml`. For example to switch a VM to CentOS 7 with 3 cpu cores and 1GB of RAM you would change the fields as follows:
 
 ```
-box: ubuntu/trusty64
+box: centos/7
 ram: 1024
 cpus: 3
 ```

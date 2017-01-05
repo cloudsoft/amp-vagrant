@@ -4,7 +4,7 @@ default_config:
     run_os_update: true
 servers:
   - name: amp
-    box: ubuntu/wily64
+    box: centos/7
     ram: 2048
     cpus: 4
     ip: 10.10.10.100
