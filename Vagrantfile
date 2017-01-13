@@ -1,6 +1,21 @@
 # -*- mode: ruby -*-
 # # vi: set ft=ruby :
 
+# ALTERING PORT FORWARDING
+#
+# If you are reading this you have likely been instructed by Vagrant to alter the example
+# line below due to the forwarded port colliding with one already in use on your system.
+#
+#   config.vm.network :forwarded_port, guest: 80, host: 1234
+#
+# This Vagrantfile does not define the port mapping here, instead you should alter
+# the following line in the `servers.yaml` file in this directory.
+#
+#   host: 8081
+#
+# Change 8081 to a port that is not in use on your local machine before attempting
+# to run vagrant up again.
+
 # Specify minimum Vagrant version and Vagrant API version
 Vagrant.require_version ">= 1.8.1"
 VAGRANTFILE_API_VERSION = "2"
@@ -63,18 +78,3 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 end
-
-
-# ALTERING PORT FORWARDING
-# If you are reading this you have likely been instructed by Vagrant to alter the example
-# line below due to the forwarded port colliding with one alread in use on your system.
-#
-#   config.vm.network :forwarded_port, guest: 80, host: 1234
-#
-# This Vagrantfile does not define the port mapping here, instead you should alter
-# the following line in the `servers.yaml` file in this directory.
-#
-#   host: 8081
-#
-# Change 8081 to a port that is not in use on your local machine before attempting
-# to run vagrant up again.

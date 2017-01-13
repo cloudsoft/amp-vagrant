@@ -23,7 +23,7 @@ servers:
     shell:
       cmd:
         - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-        - sudo service sshd restart
+        - sudo systemctl restart  sshd
   - name: byon2
     box: centos/7
     ram: 512
@@ -32,7 +32,7 @@ servers:
     shell:
       cmd:
         - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-        - sudo service sshd restart
+        - sudo systemctl restart  sshd
   - name: byon3
     box: centos/7
     ram: 512
@@ -41,7 +41,7 @@ servers:
     shell:
       cmd:
         - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-        - sudo service sshd restart
+        - sudo systemctl restart  sshd
   - name: byon4
     box: centos/7
     ram: 512
@@ -50,5 +50,5 @@ servers:
     shell:
       cmd:
         - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-        - sudo service sshd restart
+        - sudo systemctl restart  sshd
 ...
