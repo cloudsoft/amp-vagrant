@@ -34,13 +34,6 @@ sudo yum install -y java-1.8.0-openjdk-headless
 echo "Install AMP"
 sudo yum -y install cloudsoft-amp-karaf-noarch.rpm
 
-echo "Configure AMP Properties"
-sudo mkdir -p /opt/amp/.brooklyn
-sudo chown amp:amp /opt/amp/.brooklyn
-sudo cp /vagrant/files/brooklyn.properties /opt/amp/.brooklyn/
-sudo chown amp:amp /opt/amp/.brooklyn/brooklyn.properties
-sudo chmod 600 /opt/amp/.brooklyn/brooklyn.properties
-
 echo "Configure MOTD"
 sudo cp /vagrant/files/motd /etc/motd
 
