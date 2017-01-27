@@ -2,7 +2,9 @@
 
 # Exit script on error
 set -e
-
+echo "================================================================================"
+echo "==                            AMP INSTALL :: START                            =="
+echo "================================================================================"
 # Set Java Vars
 JAVA_VERSION=8
 export JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64/
@@ -35,22 +37,46 @@ echo "Install AMP"
 sudo yum -y install cloudsoft-amp-karaf-noarch.rpm
 
 echo "Configure AMP Properties"
-sudo mkdir -p /opt/amp/.brooklyn
-sudo chown amp:amp /opt/amp/.brooklyn
-sudo cp /vagrant/files/brooklyn.properties /opt/amp/.brooklyn/
-sudo chown amp:amp /opt/amp/.brooklyn/brooklyn.properties
-sudo chmod 600 /opt/amp/.brooklyn/brooklyn.properties
+sudo cp /vagrant/files/brooklyn.properties /etc/amp/brooklyn.cfg
+sudo chown amp:amp /etc/amp/brooklyn.cfg
+sudo chmod 600 /etc/amp/brooklyn.cfg
 
 echo "Configure MOTD"
 sudo cp /vagrant/files/motd /etc/motd
 
+echo "Starting AMP..."
+sudo systemctl start amp
+
 echo "Waiting for AMP to start..."
-while ! (sudo grep "BundleEvent STARTED - org.apache.brooklyn.karaf-init" /opt/amp/log/amp.debug.log) > /dev/null ; do
-  sleep 2
+sleep 10
+
+while ! (sudo grep "BundleEvent STARTED - org.apache.brooklyn.karaf-init" /var/log/amp/amp.debug.log) > /dev/null ; do
+  sleep 10
   echo ".... waiting for AMP to start at `date`"
 done
 
-# Restart AMP, so that brooklyn.properties takes effect
-# (or could extract default username:password and use REST api)
-echo "Restarting AMP..."
-sudo systemctl restart amp
+echo "================================================================================================="
+echo "==                           ▄▄▄▄▄▄▄▄▄▄▄  ▄▄       ▄▄  ▄▄▄▄▄▄▄▄▄▄▄                             =="
+echo "==                          ▐░░░░░░░░░░░▌▐░░▌     ▐░░▌▐░░░░░░░░░░░▌                            =="
+echo "==                          ▐░█▀▀▀▀▀▀▀█░▌▐░▌░▌   ▐░▐░▌▐░█▀▀▀▀▀▀▀█░▌                            =="
+echo "==                          ▐░▌       ▐░▌▐░▌▐░▌ ▐░▌▐░▌▐░▌       ▐░▌                            =="
+echo "==                          ▐░█▄▄▄▄▄▄▄█░▌▐░▌ ▐░▐░▌ ▐░▌▐░█▄▄▄▄▄▄▄█░▌                            =="
+echo "==                          ▐░░░░░░░░░░░▌▐░▌  ▐░▌  ▐░▌▐░░░░░░░░░░░▌                            =="
+echo "==                          ▐░█▀▀▀▀▀▀▀█░▌▐░▌   ▀   ▐░▌▐░█▀▀▀▀▀▀▀▀▀                             =="
+echo "==                          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌                                      =="
+echo "==                          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌                                      =="
+echo "==                          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌                                      =="
+echo "==                           ▀         ▀  ▀         ▀  ▀                                       =="
+echo "==                                                                                             =="
+echo "==  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄   =="
+echo "== ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░▌  =="
+echo "== ▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌ =="
+echo "== ▐░▌               ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌     ▐░▌          ▐░▌       ▐░▌ =="
+echo "== ▐░█▄▄▄▄▄▄▄▄▄      ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌     ▐░▌     ▐░█▄▄▄▄▄▄▄▄▄ ▐░▌       ▐░▌ =="
+echo "== ▐░░░░░░░░░░░▌     ▐░▌     ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░▌     ▐░░░░░░░░░░░▌▐░▌       ▐░▌ =="
+echo "==  ▀▀▀▀▀▀▀▀▀█░▌     ▐░▌     ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀█░█▀▀      ▐░▌     ▐░█▀▀▀▀▀▀▀▀▀ ▐░▌       ▐░▌ =="
+echo "==           ▐░▌     ▐░▌     ▐░▌       ▐░▌▐░▌     ▐░▌       ▐░▌     ▐░▌          ▐░▌       ▐░▌ =="
+echo "==  ▄▄▄▄▄▄▄▄▄█░▌     ▐░▌     ▐░▌       ▐░▌▐░▌      ▐░▌      ▐░▌     ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌ =="
+echo "== ▐░░░░░░░░░░░▌     ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌     ▐░░░░░░░░░░░▌▐░░░░░░░░░░▌  =="
+echo "==  ▀▀▀▀▀▀▀▀▀▀▀       ▀       ▀         ▀  ▀         ▀       ▀       ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀   =="
+echo "================================================================================================="
