@@ -42,7 +42,8 @@ sudo chown amp:amp /etc/amp/brooklyn.cfg
 sudo chmod 600 /etc/amp/brooklyn.cfg
 
 echo "Add Hyperledger Fabric to AMP Catalog"
-sudo curl -o /opt/amp/deploy/hyperledger-0.10-SNAPSHOT.jar -s -S https://s3.amazonaws.com/brooklyn-hyperledger-release/hyperledger-0.10-SNAPSHOT.jar
+sudo curl -o /opt/amp/deploy/hyperledger-0.16.0.jar -k -s -S -L https://github.com/cloudsoft/brooklyn-hyperledger/releases/download/0.16.0/hyperledger-0.16.0.jar
+sudo chown amp:amp /opt/amp/deploy/hyperledger-0.16.0.jar
 pattern="items:"
 append="- classpath://io.brooklyn.hyperledger:hyperledger/catalog.bom"
 sudo sed -i "/${pattern}/a \  ${append}" /opt/amp/catalog/catalog.bom
