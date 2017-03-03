@@ -9,7 +9,7 @@ The Vagrant environment has been verified on OSX 10.11 and Windows 10 using Vagr
 
 For instructions on using this Vagrant environment with Cloudsoft AMP please refer to the [Get AMP Running](http://docs.cloudsoft.io/tutorials/tutorial-get-amp-running.html) tutorial.
 
-### Customising VMs 
+### Customising VMs
 The following optional steps are provided to describe how you may override the default VM configurations.
 
 #### Running OS Updates
@@ -25,8 +25,9 @@ All nodes will start with a private interface on the 10.10.10.0/24 network. The 
 | byon2        | 10.10.10.102 |
 | byon3        | 10.10.10.103 |
 | byon4        | 10.10.10.104 |
+| byon5        | 10.10.10.105 |
 
-You can override the IP addresses assigned to each node by changing the `ip` for each machine in `servers.yaml`
+You can override the IP addresses assigned to each node by changing the `ip` for each machine in [`servers.yaml`](servers.yaml).
 
 **NOTE** These private addresses will only be accessible from your local machine. It is possible, but not documented, to expose some service ports via your local machine (reach out if you believe this would be useful for you).
 
