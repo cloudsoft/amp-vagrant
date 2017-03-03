@@ -32,7 +32,7 @@ sudo yum -y update
 
 echo "Install Java"
 sudo yum install -y java-1.8.0-openjdk-headless
-	
+
 echo "Install AMP"
 sudo yum -y install cloudsoft-amp-karaf-noarch.rpm
 
@@ -40,6 +40,12 @@ echo "Configure AMP Properties"
 sudo cp /vagrant/files/brooklyn.properties /etc/amp/brooklyn.cfg
 sudo chown amp:amp /etc/amp/brooklyn.cfg
 sudo chmod 600 /etc/amp/brooklyn.cfg
+
+echo "Add Hyperledger Fabric to AMP Catalog"
+sudo curl -o /opt/amp/deploy/hyperledger-0.10-SNAPSHOT.jar -s -S https://s3.amazonaws.com/brooklyn-hyperledger-release/hyperledger-0.10-SNAPSHOT.jar
+pattern="items:"
+append="- classpath://io.brooklyn.hyperledger:hyperledger/catalog.bom"
+sudo sed -i "/${pattern}/a \  ${append}" /opt/amp/catalog/catalog.bom
 
 echo "Configure MOTD"
 sudo cp /vagrant/files/motd /etc/motd
