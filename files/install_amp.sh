@@ -37,12 +37,14 @@ echo "Install AMP"
 sudo yum -y install cloudsoft-amp-karaf-noarch.rpm
 
 echo "Configure AMP Properties"
-sudo cp /vagrant/files/brooklyn.properties /etc/amp/brooklyn.cfg
+#sudo cp /vagrant/files/brooklyn.properties /etc/amp/brooklyn.cfg
+sudo cp /home/vagrant/sync/files/brooklyn.properties /etc/amp/brooklyn.cfg
 sudo chown amp:amp /etc/amp/brooklyn.cfg
 sudo chmod 600 /etc/amp/brooklyn.cfg
 
 echo "Configure MOTD"
-sudo cp /vagrant/files/motd /etc/motd
+#sudo cp /vagrant/files/motd /etc/motd
+sudo cp /home/vagrant/sync/files/motd /etc/motd
 
 echo "Starting AMP..."
 sudo systemctl start amp

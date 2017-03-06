@@ -14,7 +14,8 @@ servers:
        autocorrect: true
     shell:
       cmd:
-        - /vagrant/files/install_amp.sh
+        #- /vagrant/files/install_amp.sh
+        - /home/vagrant/sync/files/install_amp.sh
   - name: byon1
     box: centos/7
     ram: 512
