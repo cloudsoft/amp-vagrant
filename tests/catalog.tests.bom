@@ -1,0 +1,60 @@
+brooklyn.catalog:
+  items:
+  - "https://raw.githubusercontent.com/brooklyncentral/common-catalog-utils/master/common-tests/src/main/resources/commontests/common.tests.bom"
+  - id: amp-vagrant-tests
+    version: 0.0.1-SNAPSHOT
+    itemType: template
+    iconUrl: https://pbs.twimg.com/profile_images/770492216863236096/8igZkijg.jpg
+    name: AMP Vagrant tests
+    description: Test that AMP Vagrant goes up and a simple app can be deployed on the byon
+    item:
+      services:
+      - type: amp-vagrant
+        id: vagrant
+      - type: test-case
+        name: AMP Vagrant Tests
+        brooklyn.config:
+          targetId: vagrant
+          timeout: 1h
+        brooklyn.children:
+        - type: test-case
+          name: "1. Start and Deploy Tests"
+          brooklyn.children:  
+          - type: assert-up-and-running-initial
+            name: "1. Node up and running"
+          - type: test-ssh
+            name: "2. Install br tool & tests"
+            brooklyn.config:
+              targetId: vagrant
+              command: |
+                # install the br CLI
+                curl -O http://admin:password@localhost:8081/amp-ui-download/downloads/linux.386/br
+                chmod +x br
+                ./br login http://localhost:8081 admin password
+                ./br add-catalog https://raw.githubusercontent.com/brooklyncentral/brooklyn-tomcat-7-server/master/catalog.bom
+                ./br add-catalog https://raw.githubusercontent.com/brooklyncentral/brooklyn-tomcat-7-server/master/catalog.tests.bom
+                
+          - type: test-ssh
+            name: "3. Deploy app to BYON 1"
+            brooklyn.config:
+              targetId: vagrant
+              command: |
+                cat <<ENDOFFILE > deploy.yaml
+                location:
+                  byon:
+                    user: vagrant
+                    password: vagrant
+                    hosts:
+                    - 10.10.10.101
+                services:
+                - type: tomcat-7-tests
+                ENDOFFILE
+                ./br login http://localhost:8081 admin password
+                ./br deploy deploy.yaml
+          - type: test-ssh
+            name: "4. Check Tests Passed"
+            brooklyn.config:
+              targetId: vagrant
+              command: |
+                ./br app "Tomcat 7 tests" | grep RUNNING
+          

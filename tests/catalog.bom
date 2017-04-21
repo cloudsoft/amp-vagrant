@@ -1,0 +1,41 @@
+brooklyn.catalog:
+  id: amp-vagrant
+  version: 0.0.1-SNAPSHOT
+  name: AMP Vagrant
+  description: This is an entity which installs VirtualBox, Vagrant and amp-vagrant. It requires a bare-metal location.
+  itemType: template
+  iconUrl: https://pbs.twimg.com/profile_images/770492216863236096/8igZkijg.jpg
+  item:
+    services:
+    - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
+      name: AMP Vagrant Node
+      brooklyn.config:
+        amp.port: 8081
+        install.command: |
+          sudo apt-add-repository "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib"
+          wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+          wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+          sudo apt-get update
+          sudo apt-get install -y virtualbox-5.0 dkms git vagrant linux-headers-$(uname -r)
+          
+          # set up the virtual box kernel components 
+          sudo /sbin/vboxconfig
+          
+          cd ~
+          git clone https://github.com/cloudsoft/amp-vagrant
+          cd amp-vagrant
+          
+        launch.command: |
+          # note this is required as vagrant also uses INSTALL_DIR
+          export INSTALL_DIR=
+          cd ~/amp-vagrant
+          vagrant up
+        
+        stop.command: |
+          # note this is required as vagrant also uses INSTALL_DIR
+          export INSTALL_DIR=
+          cd ~/amp-vagrant
+          vagrant destroy -f
+        
+        checkRunning.command: |
+          curl http://admin:password@localhost:8081/v1/server/healthy | grep true
