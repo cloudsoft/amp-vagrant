@@ -8,6 +8,13 @@ brooklyn.catalog:
     name: AMP Vagrant tests
     description: Test that AMP Vagrant goes up and a simple app can be deployed on the byon
     item:
+      brooklyn.parameters:
+      - name: amp.download.url
+        label: AMP URL
+        description: |
+          URL of the AMP to use
+        type: string
+        default: http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm
       services:
       - type: amp-vagrant
         id: vagrant

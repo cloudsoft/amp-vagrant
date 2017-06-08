@@ -6,11 +6,21 @@ brooklyn.catalog:
   itemType: template
   iconUrl: https://pbs.twimg.com/profile_images/770492216863236096/8igZkijg.jpg
   item:
+    brooklyn.parameters:
+    - name: amp.download.url
+      label: AMP URL
+      description: |
+        URL of the AMP to use
+      type: string
+      default: http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm
     services:
     - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
       name: AMP Vagrant Node
       brooklyn.config:
         amp.port: 8081
+        shell.env:
+          AMP_URL: $brooklyn:config("amp.download.url")
+          DEFAULT_AMP_URL: "http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm"
         install.command: |
           sudo apt-add-repository "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib"
           wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
@@ -24,6 +34,7 @@ brooklyn.catalog:
           cd ~
           git clone https://github.com/cloudsoft/amp-vagrant
           cd amp-vagrant
+          sed -i 's@'"$DEFAULT_AMP_URL"'@'"$AMP_URL"'@g' ./files/install_amp.sh
           
         launch.command: |
           # note this is required as vagrant also uses INSTALL_DIR
