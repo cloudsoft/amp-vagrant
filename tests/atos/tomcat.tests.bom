@@ -1,0 +1,18 @@
+brooklyn.catalog:
+  items:
+  - id: tomcat-7-byon-tests
+    version: 0.0.1-SNAPSHOT
+    itemType: template
+    iconUrl: https://pbs.twimg.com/profile_images/770492216863236096/8igZkijg.jpg
+    name: Tomcat 7 BYON tests
+    description: Tests Tomcat 7 byon deployment is successful
+    item:
+
+      services:
+      - type: amp-vagrant-tests
+        id: tomcat-7-byon
+        brooklyn.config:
+          catalog.bom.url: https://raw.githubusercontent.com/cloudsoft/atos-blueprint-tests/master/tomcat.bom?token=AD96he0DcLjB8o266yD4tNpbD0VSKeg2ks5ZR3sewA%3D%3D
+          catalog.tests.bom.url: https://raw.githubusercontent.com/cloudsoft/atos-blueprint-tests/master/tests/tomcat.tests.bom?token=AD96hXt5j1bI_eJiSwbcWxzqP0SPXTiwks5ZR30IwA%3D%3D
+          catalog.item.id: atos-tomcat-node-tests
+          display.name: Tomcat 7 tests

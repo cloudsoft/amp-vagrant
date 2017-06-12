@@ -1,0 +1,18 @@
+brooklyn.catalog:
+  items:
+  - id: tomcat-7-byon-tests
+    version: 0.0.1-SNAPSHOT
+    itemType: template
+    iconUrl: https://pbs.twimg.com/profile_images/770492216863236096/8igZkijg.jpg
+    name: Tomcat 7 BYON tests
+    description: Tests tomcat 7 byon deployment is successful
+    item:
+
+      services:
+      - type: amp-vagrant-tests
+        id: tomcat7byon
+        brooklyn.config:
+          catalog.bom.url: https://raw.githubusercontent.com/brooklyncentral/brooklyn-tomcat-7-server/master/catalog.bom
+          catalog.tests.bom.url: https://raw.githubusercontent.com/brooklyncentral/brooklyn-tomcat-7-server/master/catalog.tests.bom
+          catalog.item.id: tomcat-7-tests
+          display.name: Tomcat 7 tests

@@ -15,6 +15,19 @@ brooklyn.catalog:
           URL of the AMP to use
         type: string
         default: http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm
+      - name: catalog.bom.url
+        label: "Catalog url"
+        type: string
+      - name: catalog.tests.bom.url
+        label: "Gatalog tests url"
+        type: string
+      - name: catalog.test.item.id
+        label: "Catalog item id"
+        type: string
+      - name: display.name
+        label: "Test display name"
+        type: string
+
       services:
       - type: amp-vagrant
         id: vagrant
@@ -33,35 +46,49 @@ brooklyn.catalog:
             name: "2. Install br tool & tests"
             brooklyn.config:
               targetId: vagrant
-              command: |
-                # install the br CLI
-                curl -O http://admin:password@localhost:8081/amp-ui-download/downloads/linux.386/br
-                chmod +x br
-                ./br login http://localhost:8081 admin password
-                ./br add-catalog https://raw.githubusercontent.com/brooklyncentral/brooklyn-tomcat-7-server/master/catalog.bom
-                ./br add-catalog https://raw.githubusercontent.com/brooklyncentral/brooklyn-tomcat-7-server/master/catalog.tests.bom
-                
+              command:
+                $brooklyn:formatString:
+                  - |
+                    # install the br CLI
+                    curl -O http://admin:password@localhost:8081/amp-ui-download/downloads/linux.386/br
+                    chmod +x br
+                    ./br login http://localhost:8081 admin password
+                    ./br add-catalog %s
+                    ./br add-catalog %s
+
+                  - $brooklyn:config("catalog.bom.url")
+                  - $brooklyn:config("catalog.tests.bom.url")
+
           - type: test-ssh
             name: "3. Deploy app to BYON 1"
             brooklyn.config:
               targetId: vagrant
-              command: |
-                cat <<ENDOFFILE > deploy.yaml
-                location:
-                  byon:
-                    user: vagrant
-                    password: vagrant
-                    hosts:
-                    - 10.10.10.101
-                services:
-                - type: tomcat-7-tests
-                ENDOFFILE
-                ./br login http://localhost:8081 admin password
-                ./br deploy deploy.yaml
+              command:
+                $brooklyn:formatString:
+                  - |
+                    cat <<ENDOFFILE > deploy.yaml
+                    location:
+                      byon:
+                        user: vagrant
+                        password: vagrant
+                        hosts:
+                        - 10.10.10.101
+                    services:
+                    - type: %s
+                    ENDOFFILE
+                    ./br login http://localhost:8081 admin password
+                    ./br deploy deploy.yaml
+
+                  - $brooklyn:config("catalog.test.item.id")
+
           - type: test-ssh
             name: "4. Check Tests Passed"
             brooklyn.config:
               targetId: vagrant
-              command: |
-                ./br app "Tomcat 7 tests" | grep RUNNING
+              command:
+                $brooklyn:formatString:
+                  - |
+                    ./br app "%s" | grep RUNNING
+
+                  - $brooklyn:config("display.name")
           

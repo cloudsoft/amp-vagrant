@@ -1,0 +1,18 @@
+brooklyn.catalog:
+  items:
+  - id: postgresql-node-byon-tests
+    version: 0.0.1-SNAPSHOT
+    itemType: template
+    iconUrl: https://pbs.twimg.com/profile_images/770492216863236096/8igZkijg.jpg
+    name: PostgreSQL Node BYON tests
+    description: Tests PostgreSQL Node byon deployment is successful
+    item:
+
+      services:
+      - type: amp-vagrant-tests
+        id: postgresql-node-byon
+        brooklyn.config:
+          catalog.bom.url: https://raw.githubusercontent.com/cloudsoft/atos-blueprint-tests/master/postgres.bom?token=AD96hd0WGHqVCyRYDkj9WGsWmT08w5alks5ZR3v3wA%3D%3D
+          catalog.tests.bom.url: https://raw.githubusercontent.com/cloudsoft/atos-blueprint-tests/master/tests/postgres.tests.bom?token=AD96hXOC5nUrG-KbeZ6E8ydkCUVqc-2Oks5ZR32pwA%3D%3D
+          catalog.item.id: atos-postgresql-node-tests
+          display.name: PostgreSQL Node tests

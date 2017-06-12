@@ -1,0 +1,18 @@
+brooklyn.catalog:
+  items:
+  - id: cassandra-node-byon-tests
+    version: 0.0.1-SNAPSHOT
+    itemType: template
+    iconUrl: https://pbs.twimg.com/profile_images/770492216863236096/8igZkijg.jpg
+    name: Cassandra Node BYON tests
+    description: Tests Cassandra Node byon deployment is successful
+    item:
+
+      services:
+      - type: amp-vagrant-tests
+        id: cassandra-node-byon
+        brooklyn.config:
+          catalog.bom.url: https://raw.githubusercontent.com/cloudsoft/atos-blueprint-tests/master/cassandra.bom?token=AD96hVC0iBciTlrJT1zp5DdwrnZ6GN9Kks5ZR3wawA%3D%3D
+          catalog.tests.bom.url: https://raw.githubusercontent.com/cloudsoft/atos-blueprint-tests/master/tests/cassandra.tests.bom?token=AD96hU6yJpMAu19jfS8LBx5n0QDwpEKhks5ZR31KwA%3D%3D
+          catalog.item.id: atos-cassandra-node-tests
+          display.name: Cassandra Node tests
