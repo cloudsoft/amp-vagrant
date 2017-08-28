@@ -35,7 +35,7 @@ brooklyn.catalog:
               targetId: vagrant
               command: |
                 # install the br CLI
-                curl -O http://admin:password@localhost:8081/amp-ui-download/downloads/linux.386/br
+                curl -O http://admin:password@localhost:8081/amp-ui-download/brDownloads/linux.386/br
                 chmod +x br
                 ./br login http://localhost:8081 admin password
                 ./br add-catalog https://raw.githubusercontent.com/brooklyncentral/brooklyn-tomcat-7-server/master/catalog.bom
