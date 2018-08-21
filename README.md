@@ -18,7 +18,7 @@ As a convenience you can set `run_os_update` to `true` in the `servers.yaml` fil
 #### IP Addresses
 All nodes will start with a private interface on the 10.10.10.0/24 network. The default IPs assigned to each node are as follows:
 
-| vagrant host | ip address   |
+| vagrant host |   ip address |
 | ------------ | ------------ |
 | amp          | 10.10.10.100 |
 | byon1        | 10.10.10.101 |
@@ -26,6 +26,8 @@ All nodes will start with a private interface on the 10.10.10.0/24 network. The 
 | byon3        | 10.10.10.103 |
 | byon4        | 10.10.10.104 |
 | byon5        | 10.10.10.105 |
+| amp-ha1      | 10.10.10.106 |
+| amp-ha2      | 10.10.10.107 |
 
 You can override the IP addresses assigned to each node by changing the `ip` for each machine in [`servers.yaml`](servers.yaml).
 
@@ -39,6 +41,13 @@ box: centos/7
 ram: 1024
 cpus: 3
 ```
+
+## High Availability
+
+The two AMP VMs configured for High Availability, `amp-ha1` and `amp-ha2`,
+require AWS access and secret keys be added to the `aws-cred.properties` file.
+They will create and use an S3 bucket, the name of which can be customised using
+`persistenceDir` in the `ha.properties` file.
 
 ## License
 

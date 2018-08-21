@@ -15,6 +15,32 @@ servers:
     shell:
       cmd:
         - /vagrant/files/install_amp.sh
+  - name: amp-ha1
+    box: bento/centos-7.3
+    ram: 2048
+    cpus: 4
+    ip: 10.10.10.106
+    forwarded_ports:
+     - guest: 8081
+       host: 8081
+       autocorrect: true
+    shell:
+      cmd:
+        - /vagrant/files/install_amp.sh
+        - /vagrant/files/install_amp_ha.sh
+  - name: amp-ha2
+    box: bento/centos-7.3
+    ram: 2048
+    cpus: 4
+    ip: 10.10.10.107
+    forwarded_ports:
+     - guest: 8081
+       host: 8081
+       autocorrect: true
+    shell:
+      cmd:
+        - /vagrant/files/install_amp.sh
+        - /vagrant/files/install_amp_ha.sh
   - name: byon1
     box: bento/centos-7.3
     ram: 512
