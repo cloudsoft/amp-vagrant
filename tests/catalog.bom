@@ -34,6 +34,7 @@ brooklyn.catalog:
           cd ~
           git clone https://github.com/cloudsoft/amp-vagrant
           cd amp-vagrant
+          git checkout snapshot/5.5.0
           sed -i 's@'"$DEFAULT_AMP_URL"'@'"$AMP_URL"'@g' ./files/install_amp.sh
           
         launch.command: |
