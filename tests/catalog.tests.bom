@@ -14,7 +14,7 @@ brooklyn.catalog:
         description: |
           URL of the AMP to use
         type: string
-        default: http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm
+        default: http://developers-origin.cloudsoftcorp.com/latest/io/cloudsoft/amp/cloudsoft-amp-karaf/5.5.0-SNAPSHOT/cloudsoft-amp-karaf-5.5.0-SNAPSHOT-noarch.rpm
       services:
       - type: amp-vagrant
         id: vagrant

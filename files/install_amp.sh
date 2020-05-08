@@ -10,7 +10,8 @@ JAVA_VERSION=8
 export JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64/
 
 echo "Download AMP"
-curl -o cloudsoft-amp-karaf-noarch.rpm -s -S http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm
+#curl -o cloudsoft-amp-karaf-noarch.rpm -s -S http://developers-origin.cloudsoftcorp.com/latest/io/cloudsoft/amp/cloudsoft-amp-karaf/5.5.0-SNAPSHOT/cloudsoft-amp-karaf-5.5.0-SNAPSHOT-noarch.rpm
+wget http://developers-origin.cloudsoftcorp.com/latest/io/cloudsoft/amp/cloudsoft-amp-karaf/5.5.0-SNAPSHOT/cloudsoft-amp-karaf-5.5.0-SNAPSHOT-noarch.rpm -O cloudsoft-amp-karaf-noarch.rpm
 
 echo "Validate downloaded file is an archive"
 download_type=`file cloudsoft-amp-karaf-noarch.rpm`

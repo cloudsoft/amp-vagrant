@@ -12,7 +12,7 @@ brooklyn.catalog:
       description: |
         URL of the AMP to use
       type: string
-      default: http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm
+      default: http://developers-origin.cloudsoftcorp.com/latest/io/cloudsoft/amp/cloudsoft-amp-karaf/5.5.0-SNAPSHOT/cloudsoft-amp-karaf-5.5.0-SNAPSHOT-noarch.rpm
     services:
     - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
       name: AMP Vagrant Node
@@ -20,7 +20,7 @@ brooklyn.catalog:
         amp.port: 8081
         shell.env:
           AMP_URL: $brooklyn:config("amp.download.url")
-          DEFAULT_AMP_URL: "http://downloads.cloudsoftcorp.com/amp/latest/cloudsoft-amp-karaf-latest-noarch.rpm"
+          DEFAULT_AMP_URL: "http://developers-origin.cloudsoftcorp.com/latest/io/cloudsoft/amp/cloudsoft-amp-karaf/5.5.0-SNAPSHOT/cloudsoft-amp-karaf-5.5.0-SNAPSHOT-noarch.rpm"
         install.command: |
           sudo apt-add-repository "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib"
           wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
