@@ -50,7 +50,7 @@ sudo systemctl start amp
 echo "Waiting for AMP to start..."
 sleep 10
 
-while ! (sudo grep "BundleEvent STARTED - org.apache.brooklyn.karaf-init" /var/log/amp/amp.debug.log) > /dev/null ; do
+while ! (sudo grep "Brooklyn initialisation (part two) complete after" /var/log/amp/amp.debug.log) > /dev/null ; do
   sleep 10
   echo ".... waiting for AMP to start at `date`"
 done
