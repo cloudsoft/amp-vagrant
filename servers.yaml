@@ -4,7 +4,7 @@ default_config:
     run_os_update: true
 servers:
   - name: amp
-    box: bento/centos-7.6
+    box: bento/centos-8.3
     ram: 2048
     cpus: 4
     ip: 10.10.10.100
@@ -16,7 +16,7 @@ servers:
       cmd:
         - /vagrant/files/install_amp.sh
   - name: byon1
-    box: bento/centos-7.6
+    box: bento/centos-8.3
     ram: 512
     cpus: 2
     ip: 10.10.10.101
@@ -25,7 +25,7 @@ servers:
         - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
         - sudo systemctl restart sshd
   - name: byon2
-    box: bento/centos-7.6
+    box: bento/centos-8.3
     ram: 512
     cpus: 2
     ip: 10.10.10.102
@@ -34,7 +34,7 @@ servers:
         - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
         - sudo systemctl restart sshd
   - name: byon3
-    box: bento/centos-7.6
+    box: bento/centos-8.3
     ram: 512
     cpus: 2
     ip: 10.10.10.103
@@ -43,7 +43,7 @@ servers:
         - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
         - sudo systemctl restart sshd
   - name: byon4
-    box: bento/centos-7.6
+    box: bento/centos-8.3
     ram: 512
     cpus: 2
     ip: 10.10.10.104
@@ -52,7 +52,7 @@ servers:
         - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
         - sudo systemctl restart sshd
   - name: byon5
-    box: bento/centos-7.6
+    box: bento/centos-8.3
     ram: 512
     cpus: 2
     ip: 10.10.10.105
