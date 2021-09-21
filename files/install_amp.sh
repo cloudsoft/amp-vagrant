@@ -50,7 +50,7 @@ sudo systemctl start amp
 echo "Waiting for AMP to start..."
 sleep 10
 
-while ! (sudo grep "Brooklyn initialisation (part two) complete after" /var/log/amp/amp.debug.log) > /dev/null ; do
+while ! [ "$(curl http://admin:password@localhost:8081/v1/server/healthy 2>/dev/null)" == "true" ] ; do
   sleep 10
   echo ".... waiting for AMP to start at `date`"
 done
